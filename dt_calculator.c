@@ -180,23 +180,12 @@ int main(void) {
 
 	/* Calcul */
 
-	reste_r = 0;
-	reste_p = 0;
-	reste_m = 0;
-	reste_j = 0;
 
 
 	
-
-	
-	
-
-	
-	
-	
-	int p_to_r_time_overload_t4, p_to_r_time_overload_t3, p_to_r_time_overload_t2, p_to_r_time_overload_t1 = 0;
-	int r_time_overload_t4, r_time_overload_t3, r_time_overload_t2, r_time_overload_t1 = 0;
-	int p_time_overload_t4, p_time_overload_t3, p_time_overload_t2;
+	int p_to_r_time_overload_t4 = 0, p_to_r_time_overload_t3 = 0, p_to_r_time_overload_t2 = 0, p_to_r_time_overload_t1 = 0;
+	int r_time_overload_t4 = 0, r_time_overload_t3 = 0, r_time_overload_t2 = 0, r_time_overload_t1 = 0;
+	int p_time_overload_t4 = 0, p_time_overload_t3 = 0, p_time_overload_t2 = 0;
 	
 
 /*--------------------------------------------------------------------Si m > r--------------------------------------------------------------------------*/
@@ -222,7 +211,7 @@ int main(void) {
 	180 - x = reste * 15
 	*/
 	if(t4_m != 0) {
-		r_to_m_t4 = (t4_m * r_time_overload_t4) / (t4_m / matrix_by_day);
+		r_to_m_t4 += (t4_m * r_time_overload_t4) / (t4_m / matrix_by_day);
 		t4_r +=  (t4_m * r_time_overload_t4) / (t4_m / matrix_by_day) * 15;
 		t4_m -= r_to_m_t4;
 	}
@@ -237,7 +226,7 @@ int main(void) {
 	}
 
 	if(t3_m != 0) {
-		r_to_m_t3 = (t3_m * r_time_overload_t3) / (t3_m / matrix_by_day);
+		r_to_m_t3 += (t3_m * r_time_overload_t3) / (t3_m / matrix_by_day);
 		t3_r +=  (t3_m * r_time_overload_t3) / (t3_m / matrix_by_day) * 15;
 		t3_m -= r_to_m_t3;
 	}
@@ -254,7 +243,7 @@ int main(void) {
 
 	//##
 	if(t2_m != 0) {
-		r_to_m_t2 = (t2_m * r_time_overload_t2) / (t2_m / matrix_by_day);
+		r_to_m_t2 += (t2_m * r_time_overload_t2) / (t2_m / matrix_by_day);
 		t2_r +=  (t2_m * r_time_overload_t2) / (t2_m / matrix_by_day) * 15;
 		t2_m -= r_to_m_t2;
 	}
@@ -270,7 +259,7 @@ int main(void) {
 
 	//##
 	if(t2_m != 0) {
-		r_to_m_t1 = (t1_m * r_time_overload_t1) / (t1_m / matrix_by_day);
+		r_to_m_t1 += (t1_m * r_time_overload_t1) / (t1_m / matrix_by_day);
 		t1_r +=  (t1_m * r_time_overload_t1) / (t1_m / matrix_by_day) * 15;
 		t1_m -= r_to_m_t1;
 	}
@@ -337,7 +326,7 @@ int main(void) {
 	//faut trouvé le temps q'il reste avec le gain des relic est de pristine
 
 
-	if(t1_p / pristines_by_day < t1_r / gain_r && t1_p != 0) {
+	if(t1_p / pristines_by_day < t1_r / gain_r) {
 		p_to_r_time_overload_t1 = t1_r - (gain_r * t1_p / pristines_by_day);
 		p_to_r_time_overload_t1 = p_to_r_time_overload_t1 / (gain_r + pristines_by_day * 15);
 	}
@@ -353,7 +342,7 @@ int main(void) {
 
 
 	//#
-	if(t2_p / pristines_by_day < t2_r / gain_r && t2_p != 0) {
+	if(t2_p / pristines_by_day < t2_r / gain_r) {
 		p_to_r_time_overload_t2 = t2_r - (gain_r * t2_p / pristines_by_day);
 		p_to_r_time_overload_t2 = p_to_r_time_overload_t2 / (gain_r + pristines_by_day * 15 + augment_by_day_t1);
 	}
@@ -369,7 +358,7 @@ int main(void) {
 
 
 	//#
-	if(t3_p / pristines_by_day < t3_r / gain_r && t3_p != 0) {
+	if(t3_p / pristines_by_day < t3_r / gain_r) {
 		p_to_r_time_overload_t3 = t3_r - (gain_r * t3_p / pristines_by_day);
 		p_to_r_time_overload_t3 = p_to_r_time_overload_t3 / (gain_r + pristines_by_day * 15 + augment_by_day_t2);
 	}
@@ -385,7 +374,7 @@ int main(void) {
 
 
 	//#
-	if(t4_p / pristines_by_day < t4_r / gain_r && t4_p != 0) {
+	if(t4_p / pristines_by_day < t4_r / gain_r) {
 		p_to_r_time_overload_t4 = t4_r - (gain_r * t4_p / pristines_by_day);
 		p_to_r_time_overload_t4 = p_to_r_time_overload_t4 / (gain_r + pristines_by_day * 15 + augment_by_day_t3);
 	}
@@ -400,6 +389,86 @@ int main(void) {
 	t4_p += p_to_r_t4;
 
 
+/*--------------------------------------------------------------------Si m > r--------------------------------------------------------------------------*/
+
+
+	// Si time m > time r ## si oui m time - r time = r time overload ## si non r time overload = 0
+	
+
+	if(t4_r / (gain_r + augment_by_day_t3) < t4_m / matrix_by_day) {
+		r_time_overload_t4 = t4_m / matrix_by_day - t4_r / (gain_r + augment_by_day_t3);
+	}
+	else {
+		r_time_overload_t4 = 0;
+	}
+
+
+	//réajuste les coup des tier pour que ça prenne en compte les m time overload des tier
+	/*
+		cout | time
+	180  | 60
+	     | 50
+
+	180 - x = reste * 15
+	*/
+	if(t4_m != 0) {
+		r_to_m_t4 += (t4_m * r_time_overload_t4) / (t4_m / matrix_by_day);
+		t4_r +=  (t4_m * r_time_overload_t4) / (t4_m / matrix_by_day) * 15;
+		t4_m -= r_to_m_t4;
+	}
+	
+
+	//#
+	if(t3_r / (gain_r + augment_by_day_t2) < t3_m / matrix_by_day) {
+		r_time_overload_t3 = t3_m / matrix_by_day - t3_r / (gain_r + augment_by_day_t2);
+	}
+	else {
+		r_time_overload_t3 = 0;
+	}
+
+	if(t3_m != 0) {
+		r_to_m_t3 += (t3_m * r_time_overload_t3) / (t3_m / matrix_by_day);
+		t3_r +=  (t3_m * r_time_overload_t3) / (t3_m / matrix_by_day) * 15;
+		t3_m -= r_to_m_t3;
+	}
+	//##
+	
+
+	//#
+	if(t2_r / (gain_r + augment_by_day_t1) < t2_m / matrix_by_day) {
+		r_time_overload_t2 = t2_m / matrix_by_day - t2_r / (gain_r + augment_by_day_t1);
+	}
+	else {
+		r_time_overload_t2 = 0;
+	}
+
+	//##
+	if(t2_m != 0) {
+		r_to_m_t2 += (t2_m * r_time_overload_t2) / (t2_m / matrix_by_day);
+		t2_r +=  (t2_m * r_time_overload_t2) / (t2_m / matrix_by_day) * 15;
+		t2_m -= r_to_m_t2;
+	}
+	
+	
+	//#
+	if(t1_r / gain_r < t1_m / matrix_by_day) {
+		r_time_overload_t1 = t1_m / matrix_by_day - t1_r / gain_r;
+	}
+	else {
+		r_time_overload_t1 = 0;
+	}
+
+	//##
+	if(t2_m != 0) {
+		r_to_m_t1 += (t1_m * r_time_overload_t1) / (t1_m / matrix_by_day);
+		t1_r +=  (t1_m * r_time_overload_t1) / (t1_m / matrix_by_day) * 15;
+		t1_m -= r_to_m_t1;
+	}
+	
+	
+	
+	
+	
 /*-----------------------------------------------------------------calcul des reste---------------------------------------------------------------------*/
 
 	// regade le reste des tier a l'achat et les met dans les tier au dessu !!
